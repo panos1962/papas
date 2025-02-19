@@ -1,0 +1,8 @@
+*~
+*.sw?
+*.sv
+*.xlsx
+*.o
+*.exe
+panos[0-9]*
+test[0-9]*
