@@ -123,6 +123,7 @@ Papas.panelSetup = function() {
 	})).
 
 	append(Papas.veloDOM = $('<select>').attr('id', 'velo').
+	append($('<option value="0">').text('Pause')).
 	append($('<option value="3000">').text('Grave')).
 	append($('<option value="2000">').text('Αργά')).
 	append($('<option value="1000" selected>').text('Γρήγορο')).
@@ -185,6 +186,9 @@ Papas.dcountChange = function(props) {
 	append(Papas.fyiDOM = $('<div>').attr('id', 'fyi'));
 
 	Papas.fyiMessage('Select one of ' + Papas.dcount + ' doors');
+
+	if (!Papas.velo)
+	return Papas;
 
 	if (Papas.modeAuto())
 	Papas.doorClick({
@@ -391,5 +395,15 @@ Papas.doorClick = function(props) {
 
 Papas.veloSet = function(e, val) {
 	Papas.velo = parseInt(val);
+
+	if (!Papas.velo)
+	Papas.timerClear();
+
+	else
+	Papas.doorClick({
+		timer: Papas.velo,
+		door: Papas.randomChoice(),
+	});
+
 	return Papas;
 };
