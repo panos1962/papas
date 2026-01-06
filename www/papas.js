@@ -89,7 +89,10 @@ Papas.panelSetup = function() {
 	append(Papas.failureDOM = $('<input>').
 	prop('disabled', true).attr({
 		value: Papas.tries,
-	})));
+	}))).
+
+	append(Papas.percentDOM = $('<div>').
+	attr('id', 'percent').addClass('data'));
 
 	Papas.panelBottomDOM.
 
@@ -111,6 +114,7 @@ Papas.panelSetup = function() {
 		Papas.success = 0;
 		Papas.successDOM.val(0);
 		Papas.failureDOM.val(0);
+		Papas.percentDOM.empty();
 		Papas.dcountChange();
 	})).
 
@@ -295,6 +299,7 @@ Papas.secondChoice = function(n) {
 
 	Papas.successDOM.val(Papas.success);
 	Papas.failureDOM.val(Papas.tries - Papas.success);
+	Papas.percentDOM.text((Papas.success * 100 / Papas.tries).toFixed(0) + '%');
 
 	if (Papas.modeAuto())
 	Papas.doorClick({
